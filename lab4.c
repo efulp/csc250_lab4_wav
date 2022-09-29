@@ -15,7 +15,7 @@
 #include <math.h>  
 
 
-int readWavGeader(FILE* inFile, short *sampleSizePtr, int *numSamplesPtr, int *sampleRatePtr);
+int readWavReader(FILE* inFile, short *sampleSizePtr, int *numSamplesPtr, int *sampleRatePtr);
 int readWavData(FILE* inFile, short sampleSize, int numSamples, int sampleRate);
 
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
         return 2;
     }
 
-    wavOK = readWavGeader(inFile, &sampleSize, &numSamples, &sampleRate);
+    wavOK = readWavReader(inFile, &sampleSize, &numSamples, &sampleRate);
     if(!wavOK) {
        printf("wav file %s has incompatible format \n", argv[1]);   
        return 3;
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 /**
  *  function reads the RIFF, fmt, and start of the data chunk. 
  */
-int readWavGeader(FILE* inFile, short *sampleSizePtr, int *numSamplesPtr, int *sampleRatePtr) {
+int readWavReader(FILE* inFile, short *sampleSizePtr, int *numSamplesPtr, int *sampleRatePtr) {
     char chunkId[] = "    ";  /* chunk id, note initialize as a C-string */
     char data[] = "    ";      /* chunk data */
     int chunkSize = 0;        /* number of bytes remaining in chunk */
